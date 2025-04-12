@@ -1,0 +1,84 @@
+<section>
+    <div class="create">
+        <form [formGroup]="registerFg">
+            <label>Email</label>
+            <input [formControl]="EmailCtrl" type="email">
+            <br>
+            <label>UserName</label>
+            <input [formControl]="UserNameCtrl" type="text">
+            <br>
+            <label>Age</label>
+            <input [formControl]="AgeCtrl" type="number">
+            <br>
+            <label>IS Alive</label>
+            <input [formControl]="IsAliveCtrl" type="checkbox">
+            
+            <button (click)="create()" type="submit">Register Your Account</button>
+        </form>
+    </div>
+        
+    <div>
+        {{recivedUser?.email}}
+        <br>
+        {{recivedUser?.userName}}
+        <br>
+        {{recivedUser?.age}}
+        <br>
+        {{recivedUser?.isAlive}}
+    </div>
+
+    <div>
+        <button (click)="getAll()">Get All</button>
+        
+        @for (user of recivedUsers; track $index) {
+            {{user.email}}
+            <br>
+            {{user.userName}}
+            <br>
+            {{user.age}}
+            <br>
+            {{user.isAlive}}
+        }
+    </div>
+
+    <div>
+        <button (click)="getbyUserName()">Get User</button>
+
+        {{recivedUser1?.email}}
+        <br>
+        {{recivedUser1?.userName}}
+        <br>
+        {{recivedUser1?.age}}
+        <br>
+        {{recivedUser1?.isAlive}}
+
+        <h5>{{errorMessage}}</h5>
+    </div>
+
+</section>
+<section>
+    <div class="update">
+        <form [formGroup]="registerFg">
+            <label>Email</label>
+            <input [formControl]="EmailCtrl" type="email">
+            <br>
+            <label>UserName</label>
+            <input [formControl]="UserNameCtrl" type="text">
+            <br>
+            <label>Age</label>
+            <input [formControl]="AgeCtrl" type="number">
+            <br>
+            <label>IS Alive</label>
+            <input [formControl]="IsAliveCtrl" type="checkbox">
+            
+            <button (click)="update()">Register Your Account</button>
+        </form>
+    </div>
+
+    <div>
+        <button (click)="delete()">Delete</button>
+
+        {{errorMessage1}}
+    </div>
+</section>
+

@@ -1,0 +1,14 @@
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    .create {
+        background-color: palevioletred;
+    }
+
+    .update {
+        background-color: palegreen;
+    }
+}
