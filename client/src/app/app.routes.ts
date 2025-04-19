@@ -1,3 +1,18 @@
 import { Routes } from '@angular/router';
+import { HomeComponent } from './componens/home/home.component';
+import { RegisterComponent } from './componens/account/register/register.component';
+import { LoginComponent } from './componens/account/login/login.component';
+import { FooterComponent } from './componens/footer/footer.component';
+import { NavbarComponent } from './componens/navbar/navbar.component';
+import { MemberComponent } from './componens/member/member.component';
+import { NotFoundComponent } from './componens/not-found/not-found.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'account/register', component: RegisterComponent },
+    { path: 'account/login', component: LoginComponent },
+    { path: 'footer', component: FooterComponent },
+    { path: 'navbar', component: NavbarComponent },
+    { path: 'member', component: MemberComponent },
+    { path: '**', component: NotFoundComponent }
+];

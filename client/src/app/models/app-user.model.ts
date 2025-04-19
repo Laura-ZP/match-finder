@@ -1,6 +1,10 @@
 export interface AppUser {
-    email: string,
-    userName: string,
-    age: number,
-    isAlive: boolean
+    email: string;
+    name: string;
+    password: string;
+    confirmPassword: string;
+    age: number;
+    gender: string;
+    city: string;
+    country: string;
 }
