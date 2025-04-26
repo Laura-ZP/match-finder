@@ -2,11 +2,19 @@ import { Component, inject } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Login } from '../../../models/login.model';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-login',
   imports: [
-    FormsModule, ReactiveFormsModule
+    RouterLink,
+    FormsModule, ReactiveFormsModule,
+    MatButtonModule, MatFormFieldModule, MatInputModule,
+    MatCardModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -30,8 +38,8 @@ export class LoginComponent {
 
   login(): void {
     let userInput: Login = {
-      email: 'a@gmail.com',
-      password: '12345678'
+      email: this.EmailCtrl.value,
+      password: this.PasswordCtrl.value
     }
 
     this.accountService.login(userInput).subscribe();

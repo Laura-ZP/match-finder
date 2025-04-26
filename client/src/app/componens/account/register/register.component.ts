@@ -3,12 +3,16 @@ import { AccountService } from '../../../services/account.service';
 import { FormBuilder, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppUser } from '../../../models/app-user.model';
 import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-register',
   imports: [
     RouterLink,
-    ReactiveFormsModule, FormsModule
+    ReactiveFormsModule, FormsModule,
+    MatButtonModule, MatInputModule, MatFormFieldModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
