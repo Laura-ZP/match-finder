@@ -2,7 +2,7 @@ namespace api.DTOs;
 
 public record MemberDto(
     string Email,
-    string UserName,
+    string Name,
     int Age,
     string City,
     string Country

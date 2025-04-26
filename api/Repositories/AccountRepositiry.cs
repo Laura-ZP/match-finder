@@ -23,7 +23,7 @@ public class AccountRepositiry : IAccountRepository
 
         LoggedInDto loggedInDto = new(
             Email: userInput.Email,
-            UserName: userInput.UserName
+            Name: userInput.Name
         );
 
         return loggedInDto;
@@ -39,7 +39,7 @@ public class AccountRepositiry : IAccountRepository
 
             LoggedInDto loggedInDto = new (
                 Email: user.Email,
-                UserName: user.UserName
+                Name: user.Name
             );
 
             return loggedInDto;
@@ -58,7 +58,7 @@ public class AccountRepositiry : IAccountRepository
     public async Task<UpdateDto?> UpdateByIdAsync(string userId, AppUser userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
-        .Set(user => user.UserName, userInput.UserName.Trim().ToLower())
+        .Set(user => user.Name, userInput.Name.Trim().ToLower())
         .Set(user => user.Age, userInput.Age);
 
         await _collection.UpdateOneAsync(user => user.Id == userId, updateDef, null, cancellationToken);

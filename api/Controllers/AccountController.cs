@@ -10,7 +10,7 @@ public class AccountController(IAccountRepository accountRepository) : Controlle
         if (userInput.Password != userInput.ConfirmPassword)
             return BadRequest("Your passwords do not match!");
 
-        LoggedInDto? loggedInDto = await userRepository.CreateAsync(userInput, cancellationToken);
+        LoggedInDto? loggedInDto = await accountRepository.CreateAsync(userInput, cancellationToken);
 
         if (loggedInDto is null)
             return BadRequest("This email is already taken.");
@@ -22,7 +22,7 @@ public class AccountController(IAccountRepository accountRepository) : Controlle
     [HttpPost("login")]
     public async Task<ActionResult<LoggedInDto>> Login(LoginDto userInput, CancellationToken cancellationToken)
     {
-        LoggedInDto? loggedInDto = await userRepository.LoginAsync(userInput, cancellationToken);
+        LoggedInDto? loggedInDto = await accountRepository.LoginAsync(userInput, cancellationToken);
 
         if (loggedInDto is null)
             return BadRequest("Email or Password is wrong");
@@ -33,7 +33,7 @@ public class AccountController(IAccountRepository accountRepository) : Controlle
     [HttpGet]
     public async Task<ActionResult<List<MemberDto>>> GetAll(CancellationToken cancellationToken)
     {
-        List<AppUser>? appUsers = await userRepository.GetAllAsync(cancellationToken);
+        List<AppUser>? appUsers = await accountRepository.GetAllAsync(cancellationToken);
 
         if (appUsers is null)
             return NoContent();
@@ -44,7 +44,7 @@ public class AccountController(IAccountRepository accountRepository) : Controlle
         {
             MemberDto memberDto = new(
                 Email: user.Email,
-                UserName: user.UserName,
+                Name: user.Name,
                 Age: user.Age,
                 City: user.City,
                 Country: user.Country
@@ -59,7 +59,7 @@ public class AccountController(IAccountRepository accountRepository) : Controlle
     [HttpPut("update/{userId}")]
     public async Task<ActionResult<UpdateDto>> UpdateById(string userId, AppUser userInput, CancellationToken cancellationToken)
     {
-        UpdateDto? updateDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
+        UpdateDto? updateDto = await accountRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
 
         if (updateDto is null)
             return BadRequest("Operation failed.");
@@ -70,7 +70,7 @@ public class AccountController(IAccountRepository accountRepository) : Controlle
     [HttpDelete("delete/{userId}")]
     public async Task<ActionResult<DeleteResult>> DeleteById(string userId, CancellationToken cancellationToken)
     {
-        DeleteResult? deleteResult = await userRepository.DeleteByIdAsync(userId, cancellationToken);
+        DeleteResult? deleteResult = await accountRepository.DeleteByIdAsync(userId, cancellationToken);
 
         if (deleteResult is null)
             return BadRequest("Operation failed");
