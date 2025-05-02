@@ -21,6 +21,8 @@ builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepositiry>();
+builder.Services.AddScoped<IMemberRepositiry, MemberRepositiry>();
+
 // builder.Services.AddScoped<>
 
 #region Cors: baraye ta'eede Angular HttpClient requests

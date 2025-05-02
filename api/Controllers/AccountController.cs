@@ -1,8 +1,10 @@
+using api.Controllers.Helpers;
+
 namespace api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController(IAccountRepository accountRepository) : ControllerBase
+public class AccountController(IAccountRepository accountRepository) : BaseApiController
 {    
     [HttpPost("create")]
     public async Task<ActionResult<LoggedInDto>> Create(AppUser userInput, CancellationToken cancellationToken)
@@ -28,43 +30,6 @@ public class AccountController(IAccountRepository accountRepository) : Controlle
             return BadRequest("Email or Password is wrong");
 
         return loggedInDto;
-    }
-
-    [HttpGet]
-    public async Task<ActionResult<List<MemberDto>>> GetAll(CancellationToken cancellationToken)
-    {
-        List<AppUser>? appUsers = await accountRepository.GetAllAsync(cancellationToken);
-
-        if (appUsers is null)
-            return NoContent();
-
-        List<MemberDto> memberDtos = [];
-
-        foreach (AppUser user in appUsers)
-        {
-            MemberDto memberDto = new(
-                Email: user.Email,
-                Name: user.Name,
-                Age: user.Age,
-                City: user.City,
-                Country: user.Country
-            );
-
-            memberDtos.Add(memberDto);
-        }
-
-        return memberDtos;
-    }
-
-    [HttpPut("update/{userId}")]
-    public async Task<ActionResult<UpdateDto>> UpdateById(string userId, AppUser userInput, CancellationToken cancellationToken)
-    {
-        UpdateDto? updateDto = await accountRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
-
-        if (updateDto is null)
-            return BadRequest("Operation failed.");
-
-        return updateDto;
     }
 
     [HttpDelete("delete/{userId}")]
