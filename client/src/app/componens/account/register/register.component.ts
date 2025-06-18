@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   imports: [
     RouterLink,
     ReactiveFormsModule, FormsModule,
-    MatButtonModule, MatInputModule, MatFormFieldModule
+    MatButtonModule, MatInputModule, MatFormFieldModule       
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
