@@ -74,9 +74,11 @@ export class RegisterComponent {
        gender: this.GenderCtrl.value,
        city: this.CityCtrl.value,
        country: this.CountryCtrl.value
-    } 
+    }
 
-    this.accountService.register(user).subscribe({
+    let registerResponse$ = this.accountService.register(user);
+
+    registerResponse$.subscribe({
       next: (res) => console.log(res),
       error: (err) => console.log(err.error)
     });

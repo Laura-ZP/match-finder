@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { Observable } from 'rxjs';
+import { LoggedIn } from '../../../models/logged-in.model';
 
 @Component({
   selector: 'app-login',
@@ -42,6 +44,12 @@ export class LoginComponent {
       password: this.PasswordCtrl.value
     }
 
-    this.accountService.login(userInput).subscribe();
+    let loginResponse$: Observable<LoggedIn | null> = this.accountService.login(userInput);
+
+    loginResponse$.subscribe({
+      next: (res => {
+        console.log(res);
+      })
+    });
   }
 }
