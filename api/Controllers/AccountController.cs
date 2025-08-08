@@ -6,13 +6,13 @@ namespace api.Controllers;
 [ApiController]
 public class AccountController(IAccountRepository accountRepository) : BaseApiController
 {    
-    [HttpPost("create")]
+    [HttpPost("register")]
     public async Task<ActionResult<LoggedInDto>> Create(AppUser userInput, CancellationToken cancellationToken)
     {
         if (userInput.Password != userInput.ConfirmPassword)
             return BadRequest("Your passwords do not match!");
 
-        LoggedInDto? loggedInDto = await accountRepository.CreateAsync(userInput, cancellationToken);
+        LoggedInDto? loggedInDto = await accountRepository.RegisterAsync(userInput, cancellationToken);
 
         if (loggedInDto is null)
             return BadRequest("This email is already taken.");

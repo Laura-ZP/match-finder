@@ -11,7 +11,7 @@ public class UserRepository : IUserRepository
         _collection = dbName.GetCollection<AppUser>("users");
     }
 
-       public async Task<LoggedInDto?> UpdateByIdAsync(string userId, AppUser userInput, CancellationToken cancellationToken)
+    public async Task<LoggedInDto?> UpdateByIdAsync(string userId, AppUser userInput, CancellationToken cancellationToken)
     {
         UpdateDefinition<AppUser> updateDef = Builders<AppUser>.Update
         .Set(user => user.Email, userInput.Email.Trim().ToLower());
@@ -21,11 +21,11 @@ public class UserRepository : IUserRepository
         AppUser appUser = await _collection.Find(user => user.Id == userId).FirstOrDefaultAsync(cancellationToken);
 
         if (appUser is null)
-            return null;            
-        
+            return null;
+
         LoggedInDto loggedInDto = new(
             Email: appUser.Email,
-            Name: appUser.Name
+            UserName: appUser.UserName
         );
 
         return loggedInDto;

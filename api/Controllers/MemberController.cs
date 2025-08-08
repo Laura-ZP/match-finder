@@ -16,7 +16,7 @@ public class MemberController(IMemberRepositiry memberRepositiry) : BaseApiContr
         {
             MemberDto memberDto = new(
                 Email: user.Email,
-                Name: user.Name,
+                UserName: user.UserName,
                 Age: user.Age,
                 City: user.City,
                 Country: user.Country

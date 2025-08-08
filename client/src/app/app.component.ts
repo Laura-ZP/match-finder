@@ -10,7 +10,7 @@ import { AccountService } from './services/account.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink,
+  imports: [RouterOutlet,
     ReactiveFormsModule, FormsModule, FooterComponent, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

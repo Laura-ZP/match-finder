@@ -24,6 +24,7 @@ import { LoggedIn } from '../../../models/logged-in.model';
 export class LoginComponent {
   accountService = inject(AccountService);
   fB = inject(FormBuilder);
+  loggedInRes: LoggedIn | undefined | null;
 
   loginFg = this.fB.group({
     emailCtrl: ['', [Validators.required, Validators.email]],
@@ -49,6 +50,7 @@ export class LoginComponent {
     loginResponse$.subscribe({
       next: (res => {
         console.log(res);
+        this.loggedInRes = res;
       })
     });
   }

@@ -2,7 +2,7 @@ namespace api.Repositories;
 
 public class AccountRepositiry : IAccountRepository
 {
-      private readonly IMongoCollection<AppUser> _collection;
+    private readonly IMongoCollection<AppUser> _collection;
 
     // constructor - dependency injections
     public AccountRepositiry(IMongoClient client, IMongoDbSettings dbSettings)
@@ -11,19 +11,19 @@ public class AccountRepositiry : IAccountRepository
         _collection = dbName.GetCollection<AppUser>("users");
     }
 
-    public async Task<LoggedInDto?> CreateAsync(AppUser userInput, CancellationToken cancellationToken)
+    public async Task<LoggedInDto?> RegisterAsync(AppUser userInput, CancellationToken cancellationToken)
     {
         AppUser user = await _collection.Find(doc =>
            doc.Email == userInput.Email.Trim().ToLower()).FirstOrDefaultAsync(cancellationToken);
 
-           if (user is not null)
+        if (user is not null)
             return null;
 
         await _collection.InsertOneAsync(userInput, null, cancellationToken);
 
         LoggedInDto loggedInDto = new(
             Email: userInput.Email,
-            Name: userInput.Name
+            UserName: userInput.UserName
         );
 
         return loggedInDto;
@@ -37,21 +37,21 @@ public class AccountRepositiry : IAccountRepository
         if (user is null)
             return null;
 
-            LoggedInDto loggedInDto = new (
-                Email: user.Email,
-                Name: user.Name
-            );
+        LoggedInDto loggedInDto = new(
+            Email: user.Email,
+            UserName: user.UserName
+        );
 
-            return loggedInDto;
+        return loggedInDto;
     }
-    
+
     public async Task<DeleteResult?> DeleteByIdAsync(string userId, CancellationToken cancellationToken)
     {
         AppUser appUser = await _collection.Find(doc => doc.Id == userId).FirstOrDefaultAsync(cancellationToken);
 
-        if (appUser is null) 
+        if (appUser is null)
             return null;
 
-            return await _collection.DeleteOneAsync(doc => doc.Id == userId, cancellationToken);  
+        return await _collection.DeleteOneAsync(doc => doc.Id == userId, cancellationToken);
     }
 }
