@@ -7,6 +7,7 @@ public record AppUser(
     [Length(8, 16)] string Password,
     [Length(8, 16)] string ConfirmPassword,
     [Range (18, 90)] int Age,
+    string Gender,
     string City,
     string Country
     );

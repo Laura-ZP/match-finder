@@ -1,11 +1,11 @@
 namespace api.Controllers;
 
-public class MemberController(IMemberRepositiry memberRepositiry) : BaseApiController
+public class MemberController(IMemberRepository memberRepository) : BaseApiController
 {
     [HttpGet]
     public async Task<ActionResult<List<MemberDto>>> GetAll(CancellationToken cancellationToken)
     {
-        List<AppUser>? appUsers = await memberRepositiry.GetAllAsync(cancellationToken);
+        List<AppUser>? appUsers = await memberRepository.GetAllAsync(cancellationToken);
 
         if (appUsers is null)
             return NoContent();
@@ -14,17 +14,21 @@ public class MemberController(IMemberRepositiry memberRepositiry) : BaseApiContr
 
         foreach (AppUser user in appUsers)
         {
-            MemberDto memberDto = new(
-                Email: user.Email,
-                UserName: user.UserName,
-                Age: user.Age,
-                City: user.City,
-                Country: user.Country
-            );
+            MemberDto memberDto = Mappers.ConvertAppUserToMemberDto(user);
 
             memberDtos.Add(memberDto);
         }
 
         return memberDtos;
     }   
+    
+    public async Task<ActionResult<MemberDto?>> GetByUserName(string userName, CancellationToken cancellationToken)
+    {
+        MemberDto? memberDto = await memberRepository.GetByUserNameAsync(userName, cancellationToken);
+
+        if (memberDto is null)
+            return BadRequest("User not found");
+
+        return memberDto;
+    }
 }

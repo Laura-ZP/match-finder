@@ -23,11 +23,6 @@ public class UserRepository : IUserRepository
         if (appUser is null)
             return null;
 
-        LoggedInDto loggedInDto = new(
-            Email: appUser.Email,
-            UserName: appUser.UserName
-        );
-
-        return loggedInDto;
+        return Mappers.ConvertAppUserToLoggedInDto(appUser);
     }
 }

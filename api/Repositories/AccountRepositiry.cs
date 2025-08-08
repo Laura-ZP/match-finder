@@ -21,12 +21,7 @@ public class AccountRepositiry : IAccountRepository
 
         await _collection.InsertOneAsync(userInput, null, cancellationToken);
 
-        LoggedInDto loggedInDto = new(
-            Email: userInput.Email,
-            UserName: userInput.UserName
-        );
-
-        return loggedInDto;
+        return Mappers.ConvertAppUserToLoggedInDto(userInput);
     }
 
     public async Task<LoggedInDto?> LoginAsync(LoginDto userInput, CancellationToken cancellationToken)
@@ -37,12 +32,7 @@ public class AccountRepositiry : IAccountRepository
         if (user is null)
             return null;
 
-        LoggedInDto loggedInDto = new(
-            Email: user.Email,
-            UserName: user.UserName
-        );
-
-        return loggedInDto;
+        return Mappers.ConvertAppUserToLoggedInDto(user);
     }
 
     public async Task<DeleteResult?> DeleteByIdAsync(string userId, CancellationToken cancellationToken)
