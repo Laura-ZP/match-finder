@@ -1,12 +1,12 @@
 namespace api.Repositories;
 
-public class AccountRepositiry : IAccountRepository
+public class AccountRepository : IAccountRepository
 {
     private readonly IMongoCollection<AppUser> _collection;
     private readonly ITokenService _tokenService;
 
     // constructor - dependency injections
-    public AccountRepositiry(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenService)
+    public AccountRepository(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenService)
     {
         var dbName = client.GetDatabase(dbSettings.DatabaseName);
         _collection = dbName.GetCollection<AppUser>("users");

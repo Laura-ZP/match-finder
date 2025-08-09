@@ -5,9 +5,9 @@ namespace api.Controllers;
 public class UserController(IUserRepository userRepository) : BaseApiController
 {
     [HttpPut("update/{userId}")]
-    public async Task<ActionResult<LoggedInDto>> UpdateById(string userId, AppUser userInput, CancellationToken cancellationToken)
+    public async Task<ActionResult<MemberDto>> UpdateById(string userId, AppUser userInput, CancellationToken cancellationToken)
     {
-        LoggedInDto? updateDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
+        MemberDto? updateDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
 
         if (updateDto is null)
             return BadRequest("Operation failed.");

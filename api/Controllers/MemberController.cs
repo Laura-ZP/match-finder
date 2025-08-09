@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
+
 namespace api.Controllers;
 
+[Authorize]
 public class MemberController(IMemberRepository memberRepository) : BaseApiController
 {
     [HttpGet]
@@ -20,8 +23,8 @@ public class MemberController(IMemberRepository memberRepository) : BaseApiContr
         }
 
         return memberDtos;
-    }   
-    
+    }
+
     public async Task<ActionResult<MemberDto?>> GetByUserName(string userName, CancellationToken cancellationToken)
     {
         MemberDto? memberDto = await memberRepository.GetByUserNameAsync(userName, cancellationToken);
