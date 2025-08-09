@@ -41,7 +41,7 @@
                 <input type="text" [formControl]="CountryCtrl" matInput>
             </mat-form-field>
 
-            <button routerLink="/members" (click)="register()" mat-flat-button color="parimary"
+            <button (click)="register()" mat-flat-button color="parimary"
                 [disabled]="registerFg.invalid">
                 Register
             </button>

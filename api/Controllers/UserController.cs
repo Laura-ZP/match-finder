@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
+
 namespace api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class UserController(IUserRepository userRepository) : BaseApiController
 {
+    [Authorize]
     [HttpPut("update/{userId}")]
     public async Task<ActionResult<MemberDto>> UpdateById(string userId, AppUser userInput, CancellationToken cancellationToken)
     {

@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
   selector: 'app-register',
   imports: [
-    RouterLink,
+    // RouterLink,
     ReactiveFormsModule, FormsModule,
     MatButtonModule, MatInputModule, MatFormFieldModule       
   ],
