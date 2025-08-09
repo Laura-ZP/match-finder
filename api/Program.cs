@@ -1,41 +1,15 @@
+using api.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
-
-#region MongoDbSettings
-///// get values from this file: appsettings.Development.json /////
-// get section
-builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nameof(MongoDbSettings)));
-
-// get values
-builder.Services.AddSingleton<IMongoDbSettings>(serviceProvider =>
-    serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value);
-
-// get connectionString to the db
-builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
-{
-    MongoDbSettings uri = serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value;
-    
-    return new MongoClient(uri.ConnectionString);
-});
-
-#endregion MongoDbSettings
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IAccountRepository, AccountRepositiry>();
-builder.Services.AddScoped<IMemberRepositiry, MemberRepositiry>();
-
-// builder.Services.AddScoped<>
-
-#region Cors: baraye ta'eede Angular HttpClient requests
-builder.Services.AddCors(options =>
-    {
-        options.AddDefaultPolicy(policy =>
-            policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
-    });
-#endregion Cors
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddApplicationService(builder.Configuration);
+builder.Services.AddRepositoryService();
+builder.Services.AddIdentityService(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -44,6 +18,8 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseCors();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
