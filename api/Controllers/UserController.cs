@@ -1,3 +1,4 @@
+using api.Extensions;
 using Microsoft.AspNetCore.Authorization;
 
 namespace api.Controllers;
@@ -7,14 +8,21 @@ namespace api.Controllers;
 public class UserController(IUserRepository userRepository) : BaseApiController
 {
     [Authorize]
-    [HttpPut("update/{userId}")]
-    public async Task<ActionResult<MemberDto>> UpdateById(string userId, AppUser userInput, CancellationToken cancellationToken)
+    [HttpPut("update")]
+    public async Task<ActionResult<MemberDto>> UpdateById(AppUser userInput, CancellationToken cancellationToken)
     {
-        MemberDto? updateDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
+         var userId = User.GetUserId();
 
-        if (updateDto is null)
+        Console.WriteLine(userId);
+
+        if (userId is null)
+            return Unauthorized("You are not logged. Please login again");
+
+        MemberDto? memberDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
+
+        if (memberDto is null)
             return BadRequest("Operation failed.");
 
-        return updateDto;
+        return memberDto;
     }
 }
