@@ -6,6 +6,7 @@ import { FooterComponent } from './componens/footer/footer.component';
 import { NavbarComponent } from './componens/navbar/navbar.component';
 import { MemberComponent } from './componens/member/member.component';
 import { NotFoundComponent } from './componens/not-found/not-found.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -13,6 +14,6 @@ export const routes: Routes = [
     { path: 'account/login', component: LoginComponent },
     { path: 'footer', component: FooterComponent },
     { path: 'navbar', component: NavbarComponent },
-    { path: 'members', component: MemberComponent },
+    { path: 'members', component: MemberComponent, canActivate: [authGuard] },
     { path: '**', component: NotFoundComponent }
 ];
