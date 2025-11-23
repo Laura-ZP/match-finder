@@ -11,7 +11,7 @@ public class UserController(IUserRepository userRepository) : BaseApiController
     [HttpPut("update")]
     public async Task<ActionResult<MemberDto>> UpdateById(AppUser userInput, CancellationToken cancellationToken)
     {
-         var userId = User.GetUserId();
+        var userId = User.GetUserId();
 
         Console.WriteLine(userId);
 
@@ -24,5 +24,10 @@ public class UserController(IUserRepository userRepository) : BaseApiController
             return BadRequest("Operation failed.");
 
         return memberDto;
+    }
+    
+    public void GetClaims()
+    {
+        string? userId = User.GetUserId();
     }
 }
