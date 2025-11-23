@@ -19,9 +19,12 @@ export class AppComponent implements OnInit {
   accountService = inject(AccountService);
 
   ngOnInit(): void {
-    let loggedInUser: string | null = localStorage.getItem('loggedInUser');
-    
-    if (loggedInUser != null)
-      this.accountService.setCurrentUser(JSON.parse(loggedInUser));
+    let loggedInUserStr: string | null = localStorage.getItem('loggedInUser');
+
+    if (loggedInUserStr != null) {
+      this.accountService.authorizeLoggedInUser();
+
+      this.accountService.setCurrentUser(JSON.parse(loggedInUserStr));
+    }
   }
 }

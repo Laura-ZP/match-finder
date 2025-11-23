@@ -33,7 +33,7 @@ export class AccountService {
       })
     );
   }
-  
+
   login(userInput: Login): Observable<LoggedIn | null> {
     return this.http.post<LoggedIn>(this._baseApiUrl + 'account/login', userInput).pipe(
       map(res => {
@@ -49,8 +49,23 @@ export class AccountService {
     );
   }
 
-  getAllMember(): Observable < Member[] > {
+  getAllMember(): Observable<Member[]> {
     return this.http.get<Member[]>(this._baseApiUrl + 'member');
+  }
+
+  authorizeLoggedInUser(): void {
+    console.log('ok');
+
+    this.http.get(this._baseApiUrl + 'aacount').subscribe({
+      next: (res) => {
+        if (res)
+          console.log(res);
+      },
+      error: (err) => {
+        console.log(err.error);
+        this.logout();
+      }
+    });
   }
 
   setCurrentUser(loggedIn: LoggedIn): void {
