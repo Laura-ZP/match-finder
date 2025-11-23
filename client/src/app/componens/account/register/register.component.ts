@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import { FormBuilder, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppUser } from '../../../models/app-user.model';
@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -18,17 +19,24 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   accountService = inject(AccountService);
   fB = inject(FormBuilder);
+  subscribedRegisterUser: Subscription | undefined;
 
   minDate = new Date();
   maxDate = new Date();
 
+  passwordsNotMatch: boolean | undefined;
+
   ngOnInit(): void {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 99, 0, 1);
-    this.maxDate = new Date(currentYear - 18  , 0, 1);
+    this.maxDate = new Date(currentYear - 18, 0, 1);
+  }
+
+  ngOnDestroy(): void {
+    this.subscribedRegisterUser?.unsubscribe();
   }
 
   registerFg = this.fB.group({
@@ -89,12 +97,13 @@ export class RegisterComponent implements OnInit {
         country: this.CountryCtrl.value
       }
 
-      let registerResponse$ = this.accountService.register(user);
-
-      registerResponse$.subscribe({
+      this.subscribedRegisterUser = this.accountService.register(user).subscribe({
         next: (res) => console.log(res),
         error: (err) => console.log(err.error)
-      });
+      })
+    }
+    else{
+      this.passwordsNotMatch = true;
     }
   }
 
