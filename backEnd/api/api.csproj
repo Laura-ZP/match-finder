@@ -16,4 +16,8 @@
       <PackageReference Include="MongoDB.Driver" Version="2.30.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="../../Image_Proccesing_WwwRoot/Image_Proccesing_WwwRoot.csproj" />
+    </ItemGroup>
+
 </Project>
