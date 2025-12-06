@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -6,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backEnd", "backEnd", "{1AE8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "backEnd\api\api.csproj", "{A28F0853-CD93-D005-10F9-5F5C999F3E51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image_Proccesing_WwwRoot", "Image_Proccesing_WwwRoot\Image_Proccesing_WwwRoot.csproj", "{55CB8AA0-B6F9-4FD4-BA90-6E72D63DBA50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image_Processing_WwwRoot", "Image_Processing_WwwRoot\Image_Processing_WwwRoot.csproj", "{D9404525-CE33-4D40-A85B-E52115C3BE31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +19,10 @@ Global
 		{A28F0853-CD93-D005-10F9-5F5C999F3E51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A28F0853-CD93-D005-10F9-5F5C999F3E51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A28F0853-CD93-D005-10F9-5F5C999F3E51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55CB8AA0-B6F9-4FD4-BA90-6E72D63DBA50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55CB8AA0-B6F9-4FD4-BA90-6E72D63DBA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55CB8AA0-B6F9-4FD4-BA90-6E72D63DBA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55CB8AA0-B6F9-4FD4-BA90-6E72D63DBA50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9404525-CE33-4D40-A85B-E52115C3BE31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9404525-CE33-4D40-A85B-E52115C3BE31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9404525-CE33-4D40-A85B-E52115C3BE31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9404525-CE33-4D40-A85B-E52115C3BE31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
