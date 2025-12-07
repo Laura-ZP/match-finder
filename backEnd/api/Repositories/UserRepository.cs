@@ -77,7 +77,7 @@ public class UserRepository : IUserRepository
         return null;
     }
 
-    public async Task<UpdateResult?> SetmainPhotoAsync(string userId, string photoUrlIn, CancellationToken cancellationToken)
+    public async Task<UpdateResult?> SetMainPhotoAsync(string userId, string photoUrlIn, CancellationToken cancellationToken)
     {
         #region UNSET the previous main photo: Find the photo with IsMain True; update IsMain to False
         // set query
@@ -103,5 +103,26 @@ public class UserRepository : IUserRepository
         #endregion 
     }
 
-    
+    public async Task<UpdateResult?> DeletePhotoAsync(string userId, string? Url_165_In, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrEmpty(Url_165_In)) return null;
+
+        Photo photo = await _collection.AsQueryable()
+            .Where(appUser => appUser.Id.ToString() == userId)
+            .SelectMany(appUser => appUser.Photos)
+            .Where(photo => photo.Url_165 == Url_165_In)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (photo is null) return null;
+
+        if (photo.IsMain) return null;
+
+        bool isDeleteSuccess = await _photoService.DeletePhotoFromDisk(photo);
+        if (!isDeleteSuccess) return null;
+
+        UpdateDefinition<AppUser> update = Builders<AppUser>.Update
+            .PullFilter(appUser => appUser.Photos, photo => photo.Url_165 == Url_165_In);
+
+        return await _collection.UpdateOneAsync<AppUser>(appUser => appUser.Id.ToString() == userId, update, null, cancellationToken);
+    }
 }
