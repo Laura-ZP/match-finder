@@ -26,7 +26,8 @@ public class UserController(IUserRepository userRepository) : BaseApiController
 
         return memberDto;
     }
-
+    
+    [Authorize]
     [HttpPost("add-photo")]
     public async Task<ActionResult<Photo>> AddPhoto(
         [AllowedFileExtensions, FileSize(250_000, 4_000_000)]
