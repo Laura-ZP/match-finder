@@ -9,7 +9,7 @@ namespace api.Controllers;
 public class AccountController(IAccountRepository accountRepository) : BaseApiController
 {
     [HttpPost("register")]
-    public async Task<ActionResult<LoggedInDto>> Create(AppUser userInput, CancellationToken cancellationToken)
+    public async Task<ActionResult<LoggedInDto>> Create(RegisterDto userInput, CancellationToken cancellationToken)
     {
         if (userInput.Password != userInput.ConfirmPassword)
             return BadRequest("Your passwords do not match!");
