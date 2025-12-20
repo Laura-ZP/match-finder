@@ -52,6 +52,10 @@
                 [disabled]="registerFg.invalid">
                 Register
             </button>
+
+            @if (passwordsNotMatch) {
+                <p>Passwords Do Not Match!</p>
+            }
         </form>
     </div>
 </section>
