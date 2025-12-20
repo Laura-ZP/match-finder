@@ -23,75 +23,87 @@ mat-toolbar {
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.699);
-        }
-    }
-}
-
-::ng-deep .mat-menu {
-    .user-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 2rem;
-
-        * {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-        }
-
-        .profile-info {
-            * {
-                margin: 0;
-            }
-
-            font-size: 3rem;
-            background-color: rgb(246, 209, 164);
-            width: 4rem;
-            height: 4rem;
+            height: 40px;
+            width: 40px;
             border-radius: 50%;
-            box-shadow: 3px 3px 3px rgb(144, 144, 144);
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.699);
+            padding: 0;
+            line-height: 0;
 
             img {
-                height: 4rem;
-                width: 4rem;
+                height: 100%;
+                width: 100%;
                 border-radius: 50%;
+                object-fit: cover;
             }
         }
     }
 
-
-    mat-list {
-        padding: 0;
-        margin: 0;
-
-        mat-list-item {
-            padding: 0;
-        }
-
-        .menu-items {
+    ::ng-deep .mat-menu {
+        .user-info {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 5px;
-            line-height: 47px;
-            padding-left: 1rem;
-            padding-right: 5rem;
+            gap: 10px;
+            padding: 2rem;
 
-            &:hover {
-                background-color: rgb(255, 176, 255);
-                cursor: pointer;
+            * {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .profile-info {
+                * {
+                    margin: 0;
+                }
+
+                font-size: 3rem;
+                background-color: rgb(246, 209, 164);
+                width: 4rem;
+                height: 4rem;
+                border-radius: 50%;
+                box-shadow: 3px 3px 3px rgb(144, 144, 144);
+
+                img {
+                    height: 4rem;
+                    width: 4rem;
+                    border-radius: 50%;
+                }
             }
         }
-    }
 
-    .logout {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
+
+        mat-list {
+            padding: 0;
+            margin: 0;
+
+            mat-list-item {
+                padding: 0;
+            }
+
+            .menu-items {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                line-height: 47px;
+                padding-left: 1rem;
+                padding-right: 5rem;
+
+                &:hover {
+                    background-color: rgb(255, 176, 255);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .logout {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
     }
 }
-

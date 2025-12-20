@@ -4,7 +4,7 @@ import { RegisterComponent } from './componens/account/register/register.compone
 import { LoginComponent } from './componens/account/login/login.component';
 import { FooterComponent } from './componens/footer/footer.component';
 import { NavbarComponent } from './componens/navbar/navbar.component';
-import { MemberComponent } from './componens/member/member.component';
+import { MemberComponent } from './componens/members/member.component';
 import { NotFoundComponent } from './componens/not-found/not-found.component';
 import { authGuard } from './guards/auth.guard';
 import { authLoggedInGuard } from './guards/auth-logged-in.guard';
