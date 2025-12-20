@@ -3,8 +3,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AppUser } from './models/app-user.model';
 import { FormBuilder, FormControl, ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
-import { FooterComponent } from "./componens/footer/footer.component";
-import { NavbarComponent } from "./componens/navbar/navbar.component";
+import { FooterComponent } from "./components/footer/footer.component";
+import { NavbarComponent } from "./components/navbar/navbar.component";
 import { AccountService } from './services/account.service';
 
 @Component({

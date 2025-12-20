@@ -1,3 +1,5 @@
+import { Photo } from "./photo.model";
+
 export interface Member {
     email: string;
     userName: string;
@@ -5,4 +7,5 @@ export interface Member {
     gender: string;
     city: string;
     country: string;
+    photos: Photo[];
 }

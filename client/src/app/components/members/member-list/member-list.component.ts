@@ -10,7 +10,6 @@ import { Member } from '../../models/member.model';
 @Component({
   selector: 'app-member-list',
   imports: [
-    RouterLink,
     MatCardModule, MatIconModule, MemberCardComponent
   ],
   templateUrl: './member-list.component.html',
