@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 namespace api.Models;
 
 public record AppUser(
-    [Optional]
     [property: BsonId, BsonRepresentation(BsonType.ObjectId)] string? Id,
     [EmailAddress] string Email,
     [Length(3, 30)] string UserName,
