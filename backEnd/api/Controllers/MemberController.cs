@@ -14,9 +14,9 @@ public class MemberController(IMemberRepository memberRepository) : BaseApiContr
         if (userId is null)
             return Unauthorized("You are not login. Please login again");
 
-        IEnumerable<AppUser>? appUsers = await memberRepository.GetAllAsync(cancellationToken);
+        IEnumerable<AppUser> appUsers = await memberRepository.GetAllAsync(cancellationToken);
 
-        if (appUsers is null)
+        if (!appUsers.Any())
             return NoContent();
 
         List<MemberDto> memberDtos = [];
