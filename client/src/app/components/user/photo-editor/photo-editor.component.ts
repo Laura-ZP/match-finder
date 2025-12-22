@@ -30,13 +30,10 @@ export class PhotoEditorComponent {
   uploader: FileUploader | undefined;
   hasBaseDropZoneOver = false;
   private accountService = inject(AccountService);
-  // private snackBar = inject(MatSnackBar);
-
-  constructor() {
-    this.loggedInUser = this.accountService.loggedInUserSig();
-  }
+  // private snackBar = inject(MatSnackBar);  
 
   ngOnInit(): void {
+    this.loggedInUser = this.accountService.loggedInUserSig();
     this.initializeUploader();
   }
 
@@ -64,8 +61,19 @@ export class PhotoEditorComponent {
         if (response) {
           const photo: Photo = JSON.parse(response);
           this.member?.photos.push(photo);
+
+          if(this.member?.photos.length === 1)
+            this.setNavbarProfilePhoto(photo.url_165);
         }
       }
+    }
+  }
+
+    setNavbarProfilePhoto(url_165: string): void {
+    if (this.loggedInUser) {
+      this.loggedInUser.profilePhotoUrl = url_165;
+
+      this.accountService.loggedInUserSig.set(this.loggedInUser);
     }
   }
 }
