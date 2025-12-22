@@ -25,12 +25,12 @@ import { Photo } from '../../../models/photo.model';
 export class PhotoEditorComponent {
   @Input('memberInput') member: Member | undefined;
   loggedInUser: LoggedIn | null | undefined;
-  errorGlob: string | undefined;
+  // errorGlob: string | undefined;
   apiUrl: string = environment.apiUrl;
   uploader: FileUploader | undefined;
   hasBaseDropZoneOver = false;
   private accountService = inject(AccountService);
-  private snackBar = inject(MatSnackBar);
+  // private snackBar = inject(MatSnackBar);
 
   constructor() {
     this.loggedInUser = this.accountService.loggedInUserSig();
