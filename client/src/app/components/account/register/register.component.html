@@ -33,21 +33,6 @@
                 }
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Gender</mat-label>
-                <input type="text" [formControl]="GenderCtrl" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>City</mat-label>
-                <input type="text" [formControl]="CityCtrl" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Country</mat-label>
-                <input type="text" [formControl]="CountryCtrl" matInput>
-            </mat-form-field>
-
             <button (click)="register()" mat-flat-button color="parimary"
                 [disabled]="registerFg.invalid">
                 Register

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
-import { AppUser } from '../models/app-user.model';
+import { RegisterUser } from '../models/register-user.model';
 import { map, Observable } from 'rxjs';
 import { LoggedIn } from '../models/logged-in.model';
 import { Login } from '../models/login.model';
@@ -18,7 +18,7 @@ export class AccountService {
   router = inject(Router);
   loggedInUserSig = signal<LoggedIn | null>(null);
 
-  register(user: AppUser): Observable<LoggedIn | null> {
+  register(user: RegisterUser): Observable<LoggedIn | null> {
     return this.http.post<LoggedIn>(this._baseApiUrl + 'account/register', user).pipe(
       map(res => {
         if (res) {
