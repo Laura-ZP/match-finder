@@ -17,8 +17,7 @@ export const routes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [authGuard],
         children: [
-            { path: 'members/member-list', component: MemberListComponent },
-            { path: 'member/member/card', component: MemberCardComponent }
+            { path: 'members', component: MemberListComponent }
         ]
     },
     {

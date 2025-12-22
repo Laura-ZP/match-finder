@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace api.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
 public class UserController(IUserRepository userRepository) : BaseApiController
 {
     [Authorize]

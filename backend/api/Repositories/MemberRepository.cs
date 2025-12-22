@@ -15,8 +15,8 @@ public class MemberRepository : IMemberRepository
     {
         List<AppUser> appUsers = await _collection.Find(new BsonDocument()).ToListAsync(cancellationToken);
 
-        if (appUsers.Any())
-            return null;
+        // if (appUsers.Any())
+        //     return null;
 
         return appUsers;
     }

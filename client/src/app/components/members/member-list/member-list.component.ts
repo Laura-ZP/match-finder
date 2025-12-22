@@ -4,8 +4,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { MemberCardComponent } from '../member-card/member-card.component';
-import { MemberService } from '../../services/member.service';
-import { Member } from '../../models/member.model';
+import { MemberService } from '../../../services/member.service';
+import { Member } from '../../../models/member.model';
 
 @Component({
   selector: 'app-member-list',

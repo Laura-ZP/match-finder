@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace api.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
 public class AccountController(IAccountRepository accountRepository) : BaseApiController
 {
     [HttpPost("register")]

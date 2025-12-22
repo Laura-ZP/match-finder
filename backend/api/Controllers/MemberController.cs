@@ -9,7 +9,7 @@ public class MemberController(IMemberRepository memberRepository) : BaseApiContr
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetAll(CancellationToken cancellationToken)
     {
-        string? userId = User.GetUserId();
+        var userId = User.GetUserId();
 
         if (userId is null)
             return Unauthorized("You are not login. Please login again");

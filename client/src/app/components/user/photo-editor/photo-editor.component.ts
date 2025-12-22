@@ -60,7 +60,7 @@ export class PhotoEditorComponent {
         file.withCredentials = false;
       }
 
-      this.uploader.onSuccessItem = (item, response, status, headers) => {
+      this.uploader.onSuccessItem = (item, response) => {
         if (response) {
           const photo: Photo = JSON.parse(response);
           this.member?.photos.push(photo);
