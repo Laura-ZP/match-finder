@@ -103,4 +103,22 @@ export class PhotoEditorComponent {
         }
       });
   }
+
+  deletePhotoComp(url_165: string, index: number): void {
+    this._userService.deletePhoto(url_165)
+      .pipe(take(1))
+      .subscribe({
+        next: (response: ApiResponse) => {
+          if (response && this.member) {
+            this.member.photos.splice(index, 1);
+
+            this._snackBar.open(response.message, 'Close', {
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+              duration: 7000
+            })
+          }
+        }
+      })
+  }
 }
