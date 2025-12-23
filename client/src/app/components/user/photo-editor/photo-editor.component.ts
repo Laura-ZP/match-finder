@@ -12,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Photo } from '../../../models/photo.model';
+import { UserService } from '../../../services/user.service';
+import { take } from 'rxjs';
+import { ApiResponse } from '../../../models/helpers/apiResponse.model';
 
 @Component({
   selector: 'app-photo-editor',
@@ -29,11 +32,12 @@ export class PhotoEditorComponent {
   apiUrl: string = environment.apiUrl;
   uploader: FileUploader | undefined;
   hasBaseDropZoneOver = false;
-  private accountService = inject(AccountService);
-  // private snackBar = inject(MatSnackBar);  
+  private _accountService = inject(AccountService);
+  private _snackBar = inject(MatSnackBar);
+  private _userService = inject(UserService);
 
   ngOnInit(): void {
-    this.loggedInUser = this.accountService.loggedInUserSig();
+    this.loggedInUser = this._accountService.loggedInUserSig();
     this.initializeUploader();
   }
 
@@ -62,18 +66,41 @@ export class PhotoEditorComponent {
           const photo: Photo = JSON.parse(response);
           this.member?.photos.push(photo);
 
-          if(this.member?.photos.length === 1)
+          if (this.member?.photos.length === 1)
             this.setNavbarProfilePhoto(photo.url_165);
         }
       }
     }
   }
 
-    setNavbarProfilePhoto(url_165: string): void {
+  setNavbarProfilePhoto(url_165: string): void {
     if (this.loggedInUser) {
       this.loggedInUser.profilePhotoUrl = url_165;
 
-      this.accountService.loggedInUserSig.set(this.loggedInUser);
+      this._accountService.loggedInUserSig.set(this.loggedInUser);
     }
+  }
+
+  setMainPhotoComp(url_165In: string): void {
+    this._userService.setMainPhoto(url_165In).pipe(take(1))
+      .subscribe({
+        next: (response: ApiResponse) => {
+          if (response && this.member) {
+            for (const photo of this.member.photos) {
+              if (photo.isMain === true)
+                photo.isMain = false;
+
+              this.loggedInUser!.profilePhotoUrl = url_165In;
+              this._accountService.setCurrentUser(this.loggedInUser!);
+            }
+          }
+
+          this._snackBar.open(response.message, 'close', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            duration: 7000
+          });
+        }
+      });
   }
 }
