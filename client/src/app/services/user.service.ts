@@ -14,9 +14,7 @@ export class UserService {
   private readonly _apiUrl = environment.apiUrl + 'api/user';
 
   setMainPhoto(url_165: string): Observable<ApiResponse> {
-    let quertParams = new HttpParams().set('photoUrlIn', url_165);
-
-    return this._http.put<ApiResponse>(this._apiUrl + 'set-main-photo', null, { params: quertParams });
+    return this._http.put<ApiResponse>(this._apiUrl + 'set-main-photo', null, {params: new HttpParams().set('photoUrlIn', url_165)});
   }
 
   deletePhoto(url_165In: string): Observable<ApiResponse> {
