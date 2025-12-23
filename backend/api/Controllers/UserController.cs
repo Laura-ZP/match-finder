@@ -8,7 +8,7 @@ public class UserController(IUserRepository userRepository) : BaseApiController
 {
     [Authorize]
     [HttpPut("update")]
-    public async Task<ActionResult<MemberDto>> UpdateById(AppUser userInput, CancellationToken cancellationToken)
+    public async Task<ActionResult<Response>> UpdateById(UserUpdateDto userInput, CancellationToken cancellationToken)
     {
         var userId = User.GetUserId();
 
@@ -17,14 +17,15 @@ public class UserController(IUserRepository userRepository) : BaseApiController
         if (userId is null)
             return Unauthorized("You are not logged. Please login again");
 
-        MemberDto? memberDto = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
+        UpdateResult? result = await userRepository.UpdateByIdAsync(userId, userInput, cancellationToken);
 
-        if (memberDto is null)
-            return BadRequest("Operation failed.");
-
-        return memberDto;
+        return result is null || result.ModifiedCount == 0
+            ? BadRequest("Update failed, Try again later.")
+            : Ok(new Response(
+                Message: "User has been updated successfully."
+            ));
     }
-    
+
     [Authorize]
     [HttpPost("add-photo")]
     public async Task<ActionResult<Photo>> AddPhoto(
@@ -33,7 +34,7 @@ public class UserController(IUserRepository userRepository) : BaseApiController
     )
     {
         if (file is null) return BadRequest("No file selected with this request");
-        
+
         string? userId = User.GetUserId();
 
         if (userId is null)
@@ -72,7 +73,7 @@ public class UserController(IUserRepository userRepository) : BaseApiController
 
         if (string.IsNullOrEmpty(userId))
             return Unauthorized("The user is not logged in");
-        
+
         UpdateResult? updateResult = await userRepository.DeletePhotoAsync(userId, photoUrlIn, cancellationToken);
 
         return updateResult is null || !updateResult.IsModifiedCountAvailable

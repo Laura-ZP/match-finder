@@ -56,7 +56,7 @@ export class AccountService {
   authorizeLoggedInUser(): void {
     console.log('ok');
 
-    this.http.get(this._baseApiUrl + 'aacount').subscribe({
+    this.http.get(this._baseApiUrl + 'account').subscribe({
       next: (res) => {
         if (res)
           console.log(res);

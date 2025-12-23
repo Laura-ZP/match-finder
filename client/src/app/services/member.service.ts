@@ -15,7 +15,7 @@ export class MemberService {
   getAllMembers(): Observable<Member[]> {
 
     let members$: Observable<Member[]>
-     = this.http.get<Member[]>(this._baseApiUrl + 'get-all');      
+     = this.http.get<Member[]>(this._baseApiUrl);      
 
     return members$;
   }

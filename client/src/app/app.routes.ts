@@ -9,6 +9,7 @@ import { authGuard } from './guards/auth.guard';
 import { authLoggedInGuard } from './guards/auth-logged-in.guard';
 import { MemberListComponent } from './components/members/member-list/member-list.component';
 import { MemberCardComponent } from './components/members/member-card/member-card.component';
+import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -17,7 +18,8 @@ export const routes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [authGuard],
         children: [
-            { path: 'members', component: MemberListComponent }
+            { path: 'members', component: MemberListComponent },
+            { path: 'user/user-edit', component: UserEditComponent }
         ]
     },
     {
