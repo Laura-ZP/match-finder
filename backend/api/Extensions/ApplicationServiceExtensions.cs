@@ -1,3 +1,5 @@
+using api.Helpers;
+
 namespace api.Extensions;
 
 public static class ApplicationServiceExtensions
@@ -30,6 +32,12 @@ public static class ApplicationServiceExtensions
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
             });
         #endregion Cors
+
+          #region Other
+
+        services.AddScoped<LogUserActivity>(); // monitor/log userActivity
+
+        #endregion Other
 
         return services;
     }
