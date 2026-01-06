@@ -5,12 +5,15 @@ import { FormBuilder, FormControl, ReactiveFormsModule, FormsModule, Validators 
 import { FooterComponent } from "./components/footer/footer.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { AccountService } from './services/account.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,
-    ReactiveFormsModule, FormsModule, FooterComponent, NavbarComponent],
+    ReactiveFormsModule, FormsModule, FooterComponent, NavbarComponent,
+    NgxSpinnerModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
