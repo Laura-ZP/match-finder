@@ -10,6 +10,8 @@ import { authLoggedInGuard } from './guards/auth-logged-in.guard';
 import { MemberListComponent } from './components/members/member-list/member-list.component';
 import { MemberCardComponent } from './components/members/member-card/member-card.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { NoAccessComponent } from './components/errors/no-access/no-access.component';
+import { ServerErrorComponent } from './components/errors/server-error/server-error.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -19,7 +21,8 @@ export const routes: Routes = [
         canActivate: [authGuard],
         children: [
             { path: 'members', component: MemberListComponent },
-            { path: 'user/user-edit', component: UserEditComponent }
+            { path: 'user/user-edit', component: UserEditComponent },
+            { path: 'no-access', component: NoAccessComponent },
         ]
     },
     {
@@ -31,7 +34,9 @@ export const routes: Routes = [
             { path: 'account/login', component: LoginComponent },
         ]
     },
-    { path: 'footer', component: FooterComponent },
     { path: 'navbar', component: NavbarComponent },
+    { path: 'footer', component: FooterComponent },
+    { path: 'server-error', component: ServerErrorComponent },
+    { path: '**', component: NotFoundComponent, pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }
 ];
